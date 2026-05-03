@@ -2,7 +2,7 @@ import cv2
 import face_recognition
 import os
 import numpy as np
-# --- 1. AŞAMA: ÖĞRETME (EĞİTİM) ---
+# --- 1. AŞAMA: Sistem Eğitimi ---
 yol = r'C:\PROJE\bilinen_kisiler'
 print("Sistem eğitiliyor, lütfen bekleyin...")
 
@@ -18,12 +18,12 @@ for dosya in os.listdir(yol):
     if dosya.lower().endswith(('.jpg', '.jpeg', '.png')):
         tam_yol = os.path.join(yol, dosya)
         
-        # Türkçe karakterli dosya yolları için güvenli okuma
+        # Türkçe karakterli dosya yolları için güvenli okuma 
         resim_verisi = np.fromfile(tam_yol, np.uint8)
         img = cv2.imdecode(resim_verisi, cv2.IMREAD_COLOR)
         
         if img is not None:
-            # İsmi temizle (Örn: ali_1.jpg -> ALI)
+            # İsmi temizle işlemi (Örn: ali_1.jpg -> ALI)
             temiz_isim = os.path.splitext(dosya)[0].split('_')[0].upper()
             
             img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -37,18 +37,18 @@ for dosya in os.listdir(yol):
 print(f"\nEğitim tamamlandı. Tanınacak kişiler: {list(set(isimler))}")
 print("-" * 50)
 
-# --- 2. AŞAMA: GERÇEK ZAMANLI TANIMA ---
-toplam_gecenler = set()  # Aynı kişiyi tekrar tekrar saymamak için isimleri burada tutuyoruz.........
+# --- 2. AŞAMA: Gerçek Zamanlı Yüz Tanıma ---
+toplam_gecenler = set()  # Aynı kişiyi tekrar tekrar saymamak için isimleri burada tutuyoruz
+
 # --- SAYICI İÇİN HAFIZA ---
 tum_gecen_yuz_kodlari = []  # Görülen her yeni yüzün imzasını buraya kaydedeceğiz
 toplam_insan_sayisi = 0     # Ekrandan gelip geçen toplam kişi sayısı
 
-# --- 2. AŞAMA: GERÇEK ZAMANLI TANIMA ---
 cap = cv2.VideoCapture(0)
 cap = cv2.VideoCapture(0)
 islem_yapilsin_mi = True 
 
-# Sonuçları saklamak için boş liste (Kasma önleme için kare atlandığında kullanılır)
+# Sonuçları saklamak için boş liste (Kasma önleme için kare atlandığında kullanıyoruz)
 display_names = []
 
 while True:
@@ -83,12 +83,6 @@ while True:
                 tum_gecen_yuz_kodlari.append(encodeFace)
                 toplam_insan_sayisi += 1
             
-            # -----------------------------------------------
-
-            mesafeler = face_recognition.face_distance(bilinen_kodlar, encodeFace)
-            # ... (kodun geri kalanı buradan devam ediyor)
-            # TOLERANS: 0.4 - 0.5 arası en güvenlisidir. 
-            # 0.6 yaparsan yabancıları tanıdıklarına benzetme ihtimali artar.
             mesafeler = face_recognition.face_distance(bilinen_kodlar, encodeFace)
             
             name = "BILINMIYOR"
@@ -124,7 +118,7 @@ while True:
     # Anlık karede kaç yüz varsa say
     anlik_kisi_sayisi = len(display_names)
 
-    # Sol üst köşeye bilgi kutusu (Siyah dikdörtgen üzerine beyaz yazı)
+    # Sol üst köşeye bilgi kutusu 
     cv2.rectangle(img, (0, 0), (350, 110), (0, 0, 0), cv2.FILLED)
     
     cv2.putText(img, f"TOPLAM GEÇEN: {toplam_insan_sayisi}", (15, 35), 
