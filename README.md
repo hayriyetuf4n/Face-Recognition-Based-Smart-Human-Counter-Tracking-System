@@ -1,5 +1,4 @@
-# Yuz Tanima Destekli Akilli İnsan Sayaci ve Takip Sistemi
-(Face Recognition Based Smart Human Counter & Tracking System)
+# Yuz Tanima Destekli Akilli İnsan Sayaci ve Takip Sistemi/Face Recognition Based Smart Human Counter & Tracking System
 Bu proje, Python ve OpenCV kullanarak geliştirilmiş, güvenlik ve istatistik odaklı bir görüntü işleme çözümüdür. Sistem, sadece bir yüzü algılamakla kalmaz, aynı zamanda o yüzün "parmak izini" (encoding) çıkararak daha önce görülüp görülmediğini anlar.
 
 Öne Çıkan Fonksiyonlar:
