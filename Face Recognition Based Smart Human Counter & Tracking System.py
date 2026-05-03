@@ -2,7 +2,6 @@ import cv2
 import face_recognition
 import os
 import numpy as np
-# --- 1. AŞAMA: Sistem Eğitimi ---
 yol = r'C:\PROJE\bilinen_kisiler'
 print("Sistem eğitiliyor, lütfen bekleyin...")
 
@@ -112,13 +111,15 @@ while True:
         cv2.rectangle(img, (x1, y2 - 35), (x2, y2), renk, cv2.FILLED) # İsim arka planı
         cv2.putText(img, name, (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_DUPLEX, 0.8, (255, 255, 255), 1)
 
+
+    
     # Bilgi notu
     cv2.putText(img, "Çıkmak için 'q' tuşuna basın", (10, 30), cv2.FONT_HERSHEY_PLAIN, 1.2, (0, 255, 255), 1)
     
     # Anlık karede kaç yüz varsa say
     anlik_kisi_sayisi = len(display_names)
 
-    # Sol üst köşeye bilgi kutusu 
+    # Sol üst köşeye bilgi kutusu (Siyah dikdörtgen üzerine beyaz yazı)
     cv2.rectangle(img, (0, 0), (350, 110), (0, 0, 0), cv2.FILLED)
     
     cv2.putText(img, f"TOPLAM GEÇEN: {toplam_insan_sayisi}", (15, 35), 
